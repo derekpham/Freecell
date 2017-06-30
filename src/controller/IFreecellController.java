@@ -1,8 +1,8 @@
-package cs3500.hw03;
+package controller;
 
 import java.util.List;
 
-import cs3500.hw02.FreecellOperations;
+import model.FreecellOperations;
 
 /**
  * To represent a freecell game controller.

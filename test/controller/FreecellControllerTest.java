@@ -1,4 +1,4 @@
-package cs3500.hw03;
+package controller;
 
 import org.junit.Test;
 
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import cs3500.hw02.Card;
-import cs3500.hw02.FreecellModel;
-import cs3500.hw02.FreecellOperations;
-import cs3500.hw02.Suite;
+import model.Card;
+import model.FreecellModel;
+import model.FreecellOperations;
+import model.Suite;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

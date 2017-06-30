@@ -1,4 +1,4 @@
-package cs3500.hw02;
+package model;
 
 /**
  * Type for the three types of piles in a game of Freecell. <br>

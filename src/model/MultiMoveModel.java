@@ -1,11 +1,7 @@
-package cs3500.hw04;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cs3500.hw02.Card;
-import cs3500.hw02.FreecellModel;
-import cs3500.hw02.PileType;
 
 /**
  * An implementation of FreecellOperations that supports moving multi-cards at once.

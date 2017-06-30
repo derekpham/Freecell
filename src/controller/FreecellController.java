@@ -1,13 +1,12 @@
-package cs3500.hw03;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import cs3500.hw02.Card;
-import cs3500.hw02.FreecellOperations;
-import cs3500.hw02.PileType;
-import cs3500.hw04.MultiMoveModel;
+import model.Card;
+import model.FreecellOperations;
+import model.PileType;
 
 /**
  * A simple text-based controller for the freecell game.

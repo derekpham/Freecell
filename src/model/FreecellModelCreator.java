@@ -1,8 +1,4 @@
-package cs3500.hw04;
-
-import cs3500.hw02.Card;
-import cs3500.hw02.FreecellModel;
-import cs3500.hw02.FreecellOperations;
+package model;
 
 /**
  * A factory class that supports creating a single-move freecell game

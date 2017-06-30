@@ -2,7 +2,7 @@
 06/02/17 - Added char representation for each enum
  */
 
-package cs3500.hw02;
+package model;
 
 /**
  * This class represents a Suite for the four types of suite in the game of freecell.

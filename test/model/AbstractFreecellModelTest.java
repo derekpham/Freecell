@@ -10,15 +10,13 @@
            only
  */
 
-package cs3500.hw02;
+package model;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import cs3500.hw04.MultiMoveModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

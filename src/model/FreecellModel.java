@@ -5,7 +5,7 @@
             this class can override the move() method more easily.
  */
 
-package cs3500.hw02;
+package model;
 
 import java.util.ArrayList;
 import java.util.Collections;

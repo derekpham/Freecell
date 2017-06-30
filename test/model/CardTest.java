@@ -2,7 +2,7 @@
 - Removed unused imports - 06/02/17
  */
 
-package cs3500.hw02;
+package model;
 
 import org.junit.Test;
 

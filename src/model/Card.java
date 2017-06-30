@@ -1,4 +1,4 @@
-package cs3500.hw02;
+package model;
 
 import java.util.Objects;
 
