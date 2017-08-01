@@ -16,7 +16,7 @@ public final class FreecellModelCreatorTest {
 
   @Test
   public void testSingleMove() {
-    FreecellOperations<Card> singleMove = FreecellModelCreator
+    FreecellOperations singleMove = FreecellModelCreator
             .create(FreecellModelCreator.GameType.SINGLEMOVE);
     assertTrue(singleMove instanceof FreecellModel);
   }
@@ -25,7 +25,7 @@ public final class FreecellModelCreatorTest {
   // multi-card move should throw an exception here
   @Test(expected = IllegalArgumentException.class)
   public void testSingleMove1() {
-    FreecellOperations<Card> singleMove = FreecellModelCreator
+    FreecellOperations singleMove = FreecellModelCreator
             .create(FreecellModelCreator.GameType.SINGLEMOVE);
     singleMove.startGame(singleMove.getDeck(), 5, 4, false);
     singleMove.move(PileType.CASCADE, 2, 9, PileType.OPEN, 1);
@@ -34,7 +34,7 @@ public final class FreecellModelCreatorTest {
 
   @Test
   public void testMultiMove() {
-    FreecellOperations<Card> multi = FreecellModelCreator
+    FreecellOperations multi = FreecellModelCreator
             .create(FreecellModelCreator.GameType.MULTIMOVE);
     assertTrue(multi instanceof MultiMoveModel);
   }
@@ -43,7 +43,7 @@ public final class FreecellModelCreatorTest {
   // multi-card move should be successful here
   @Test
   public void testMultiMove1() {
-    FreecellOperations<Card> multiMove = FreecellModelCreator
+    FreecellOperations multiMove = FreecellModelCreator
             .create(FreecellModelCreator.GameType.MULTIMOVE);
     multiMove.startGame(multiMove.getDeck(), 5, 4, false);
     multiMove.move(PileType.CASCADE, 2, 9, PileType.OPEN, 1);

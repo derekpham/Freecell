@@ -7,7 +7,7 @@ import java.util.List;
  * card type, i.e. when you implement it, you can substitute K with your
  * implementation of a card.
  */
-public interface FreecellOperations<K> {
+public interface FreecellOperations {
 
   /**
    * Return a valid and complete deck of cards for a game of Freecell.
@@ -22,7 +22,7 @@ public interface FreecellOperations<K> {
    *
    * @return the deck of cards as a list
    */
-  List<K> getDeck();
+  List<Card> getDeck();
 
   /**
    * Deal a new game of freecell with the given deck, with or without shuffling
@@ -40,7 +40,7 @@ public interface FreecellOperations<K> {
    * @param shuffle         if true, shuffle the deck else deal the deck as-is
    * @throws IllegalArgumentException if the deck is invalid
    */
-  void startGame(List<K> deck, int numCascadePiles, int numOpenPiles, boolean
+  void startGame(List<Card> deck, int numCascadePiles, int numOpenPiles, boolean
           shuffle)
           throws
           IllegalArgumentException;

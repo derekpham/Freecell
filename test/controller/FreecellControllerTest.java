@@ -10,6 +10,7 @@ import java.util.List;
 import model.Card;
 import model.FreecellModel;
 import model.FreecellOperations;
+import model.Kind;
 import model.Suite;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
  * Tests for the FreecellController class.
  */
 public class FreecellControllerTest {
-  FreecellOperations<Card> model = new FreecellModel();
+  FreecellOperations model = new FreecellModel();
   Appendable output = new StringBuilder();
   IFreecellController<Card> controller =
           new FreecellController(new StringReader("k"), output);
@@ -64,7 +65,7 @@ public class FreecellControllerTest {
   public void testStartGameFailHasDupsDeck() {
     List<Card> cards = new LinkedList<>();
     for (int i = 0; i < cards.size(); i += 1) {
-      cards.add(new Card(1, Suite.CLUB));
+      cards.add(new Card(Kind.ACE, Suite.CLUB));
     }
 
     controller.playGame(cards, model, 5, 3, true);

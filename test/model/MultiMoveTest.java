@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
  * that test specifically moves that involve moving multiple cards.
  */
 public final class MultiMoveTest {
-  FreecellOperations<Card> model = new MultiMoveModel();
+  FreecellOperations model = new MultiMoveModel();
 
   @Test(expected = IllegalArgumentException.class)
   public void moveInvalidBuild1() {

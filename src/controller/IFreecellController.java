@@ -20,6 +20,6 @@ public interface IFreecellController<K> {
    * @param numOpens the number of open piles
    * @param shuffle whether to shuffle or not
    */
-  void playGame(List<K> deck, FreecellOperations<K> model, int numCascades, int numOpens,
+  void playGame(List<K> deck, FreecellOperations model, int numCascades, int numOpens,
                 boolean shuffle) throws IllegalArgumentException;
 }

@@ -2,9 +2,15 @@ package model;
 
 import java.util.Objects;
 
+// TODO Objects.requireNonNull() or throws?
+
 /*
 06/02/17 - Make this class final
+07/31/17 - Refactored the Kind enum into this class instead of using numbers to represent values
+           -> delegates several methods to the Kind class
+         - Renamed getNumber() method to getValue()
  */
+
 /**
  * To represent a card in the game of Freecell.
  * Valid cards must be from 2 to 10, jack, queen, king, or ace,
@@ -14,30 +20,26 @@ import java.util.Objects;
  */
 public final class Card {
   private final Suite suite;
-  private final int number;
+  private final Kind kind;
 
   /**
    * Constructs a card based on the given number and suite.
    *
-   * @param num the number of the card
+   * @param kind the kind of the card such as ace, two, jack, queen, king
    * @param suite the suite of the card
    * @throws IllegalArgumentException if the given number is less than 1 or greater than 13
    * @throws IllegalArgumentException if the given suite is null
    */
-  public Card(int num, Suite suite) {
-    if (num < 1 || num > 13) {
-      throw new IllegalArgumentException("Invalid card number: " + num);
+  public Card(Kind kind, Suite suite) {
+    // TODO maybe have a method that checks for any numbers of arguments
+    if (kind == null || suite == null) {
+      throw new IllegalArgumentException("One of the arguments has not been initialized.");
     }
-    if (suite == null) {
-      throw new IllegalArgumentException("Invalid suite: null");
-    }
-    this.number = num;
+
+    this.kind = kind;
     this.suite = suite;
   }
 
-  /*
-  06/02/17 - Used toString() for the Suite class instead of manually using switch case
-   */
   /**
    * Formats this card with its number, or its letter (if the number is 1, 11, 12, or 13),
    * followed by its suite.
@@ -45,29 +47,7 @@ public final class Card {
    * @return the formatted string that represents {@code Card}.
    */
   public String toString() {
-    String result = "";
-
-    switch (this.number) {
-      case 1:
-        result += "A";
-        break;
-      case 11:
-        result += "J";
-        break;
-      case 12:
-        result += "Q";
-        break;
-      case 13:
-        result += "K";
-        break;
-      default:
-        result += this.number;
-        break;
-    }
-
-    result += this.suite.toString();
-
-    return result;
+    return this.kind.toString() + this.suite.toString();
   }
 
   /**
@@ -84,8 +64,8 @@ public final class Card {
    *
    * @return the number of this {@code Card}
    */
-  public int getNumber() {
-    return this.number;
+  public int getValue() {
+    return this.kind.getValue();
   }
 
   @Override
@@ -99,12 +79,12 @@ public final class Card {
     }
 
     Card that = (Card)other;
-    return this.number == that.number && this.suite == that.suite;
+    return this.kind == that.kind && this.suite == that.suite;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.number, this.suite);
+    return Objects.hash(this.kind, this.suite);
   }
 
   /**
@@ -134,9 +114,9 @@ public final class Card {
    */
   public boolean isOneHigher(Card other) {
     if (other == null) {
-      throw new IllegalArgumentException("Invalid input: null");
+      throw new IllegalArgumentException("One of the arguments has not been initialized.");
     }
 
-    return this.number - other.number == 1;
+    return this.getValue() - other.getValue() == 1;
   }
 }

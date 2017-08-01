@@ -27,10 +27,10 @@ import static org.junit.Assert.assertTrue;
  * {@link FreecellModel} class and the {@link MultiMoveModel} class.
  */
 public abstract class AbstractFreecellModelTest {
-  protected abstract FreecellOperations<Card> factory();
+  protected abstract FreecellOperations factory();
 
-  FreecellOperations<Card> game1 = factory();
-  FreecellOperations<Card> game2 = factory();
+  FreecellOperations game1 = factory();
+  FreecellOperations game2 = factory();
 
   @Test
   public void testGetDeckSize() {
@@ -67,8 +67,8 @@ public abstract class AbstractFreecellModelTest {
   public void testGetDeckValidCards() {
     List<Card> deck1 = game1.getDeck();
     for (Card card : deck1) {
-      assertFalse(card.getNumber() < 1);
-      assertFalse(card.getNumber() > 13);
+      assertFalse(card.getValue() < 1);
+      assertFalse(card.getValue() > 13);
       assertFalse(card.getSuite() == null);
     }
   }
@@ -87,14 +87,14 @@ public abstract class AbstractFreecellModelTest {
   public void testStartGameInvalidDeck2() {
     List<Card> invalidDeck = new ArrayList<>();
     for (int i = 0; i < 52; i += 1) {
-      invalidDeck.add(new Card(2, Suite.CLUB));
+      invalidDeck.add(new Card(Kind.TWO, Suite.CLUB));
     }
     game1.startGame(invalidDeck, 5, 2, true);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testStartGameInvalidDeck3() {
-    game1.startGame(Arrays.asList(new Card[] {new Card(1, Suite.SPADE)}), 5, 2, false);
+    game1.startGame(Arrays.asList(new Card[] {new Card(Kind.ACE, Suite.SPADE)}), 5, 2, false);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -592,14 +592,14 @@ public abstract class AbstractFreecellModelTest {
 
   public static final class SingleMoveTest extends AbstractFreecellModelTest {
     @Override
-    protected FreecellOperations<Card> factory() {
+    protected FreecellOperations factory() {
       return new FreecellModel();
     }
   }
 
   public static final class MultiMoveTest extends AbstractFreecellModelTest {
     @Override
-    protected FreecellOperations<Card> factory() {
+    protected FreecellOperations factory() {
       return new MultiMoveModel();
     }
   }

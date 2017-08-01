@@ -34,7 +34,7 @@ public class FreecellController implements IFreecellController<Card> {
   }
 
   @Override
-  public void playGame(List<Card> deck, FreecellOperations<Card> model, int numCascades,
+  public void playGame(List<Card> deck, FreecellOperations model, int numCascades,
                        int numOpens, boolean shuffle) throws IllegalArgumentException {
     if (deck == null || model == null) {
       throw new IllegalArgumentException("One of the parameters has not been initialized");

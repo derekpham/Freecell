@@ -6,6 +6,8 @@ package model;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,57 +15,33 @@ import static org.junit.Assert.assertTrue;
 /** Tests for the class {@link Card}.
  */
 public final class CardTest {
-  Card aceOfDiamonds = new Card(1, Suite.DIAMOND);
-  Card twoOfSpades = new Card(2, Suite.SPADE);
-  Card tenOfClubs = new Card(10, Suite.CLUB);
-  Card jackOfHearts = new Card(11, Suite.HEART);
-  Card queenOfSpades = new Card(12, Suite.SPADE);
-  Card kingOfClubs = new Card(13, Suite.CLUB);
-  Card nineOfHearts = new Card(9, Suite.HEART);
+  //TODO consider fuzzing the tests
+  private static final Random randGen = new Random();
+  private static final Kind[] kinds = Kind.values();
+  private static final Suite[] suites = Suite.values();
+
+  private final Card aceOfDiamonds = new Card(Kind.ACE, Suite.DIAMOND);
+  private final Card twoOfSpades = new Card(Kind.TWO, Suite.SPADE);
+  private final Card tenOfClubs = new Card(Kind.TEN, Suite.CLUB);
+  private final Card jackOfHearts = new Card(Kind.JACK, Suite.HEART);
+  private final Card nineOfHearts = new Card(Kind.NINE, Suite.HEART);
+  private final Card queenOfSpades = new Card(Kind.QUEEN, Suite.SPADE);
+  private final Card kingOfClubs = new Card(Kind.KING, Suite.CLUB);
 
   @Test(expected = IllegalArgumentException.class)
-  public void constructorFail1() {
-    new Card(-1, Suite.DIAMOND);
+  public void createFailNull1() {
+    new Card(null, Suite.CLUB);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void constructorFail2() {
-    new Card(0, Suite.DIAMOND);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void constructorFail3() {
-    new Card(-10, Suite.DIAMOND);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void constructorFail4() {
-    new Card(14, Suite.DIAMOND);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void constructorFail5() {
-    new Card(20, Suite.DIAMOND);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void constructorFail6() {
-    new Card(3, null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void constructorFail7() {
-    new Card(-1, null);
+  public void createFailNull2() {
+    new Card(Kind.EIGHT, null);
   }
 
   @Test
   public void testToString() {
-    assertEquals(aceOfDiamonds.toString(), "A♦");
-    assertEquals(twoOfSpades.toString(), "2♠");
-    assertEquals(tenOfClubs.toString(), "10♣");
-    assertEquals(jackOfHearts.toString(), "J♥");
-    assertEquals(queenOfSpades.toString(), "Q♠");
-    assertEquals(kingOfClubs.toString(), "K♣");
+    assertEquals(new Card(Kind.ACE, Suite.DIAMOND).toString(), "A♦");
+    assertEquals(new Card(Kind.FIVE, Suite.CLUB).toString(), "5♣");
   }
 
   @Test
@@ -75,13 +53,11 @@ public final class CardTest {
   }
 
   @Test
-  public void testGetNumber() {
-    assertEquals(aceOfDiamonds.getNumber(), 1);
-    assertEquals(twoOfSpades.getNumber(), 2);
-    assertEquals(tenOfClubs.getNumber(), 10);
-    assertEquals(jackOfHearts.getNumber(), 11);
-    assertEquals(queenOfSpades.getNumber(), 12);
-    assertEquals(kingOfClubs.getNumber(), 13);
+  public void testGetValue() {
+    assertEquals(aceOfDiamonds.getValue(), 1);
+    assertEquals(twoOfSpades.getValue(), 2);
+    assertEquals(tenOfClubs.getValue(), 10);
+    assertEquals(jackOfHearts.getValue(), 11);
   }
 
   @Test
@@ -99,7 +75,7 @@ public final class CardTest {
 
   @Test
   public void testEqualsSymmetric() {
-    Card anotherAce = new Card(1, Suite.DIAMOND);
+    Card anotherAce = new Card(Kind.ACE, Suite.DIAMOND);
     assertTrue(anotherAce.equals(aceOfDiamonds));
     assertTrue(aceOfDiamonds.equals(anotherAce));
   }
@@ -107,7 +83,7 @@ public final class CardTest {
   @Test
   public void testHashcodeLogic() {
     assertEquals(aceOfDiamonds.hashCode(), aceOfDiamonds.hashCode());
-    Card anotherAce = new Card(1, Suite.DIAMOND);
+    Card anotherAce = new Card(Kind.ACE, Suite.DIAMOND);
     assertEquals(aceOfDiamonds.hashCode(), anotherAce.hashCode());
   }
 
@@ -119,7 +95,7 @@ public final class CardTest {
   @Test
   public void testHasOppositeColorsDiamond() {
     assertFalse(aceOfDiamonds.hasOppositeColors(aceOfDiamonds));
-    assertFalse(aceOfDiamonds.hasOppositeColors(new Card(2, Suite.DIAMOND)));
+    assertFalse(aceOfDiamonds.hasOppositeColors(new Card(Kind.TWO, Suite.DIAMOND)));
     assertFalse(aceOfDiamonds.hasOppositeColors(jackOfHearts));
     assertFalse(jackOfHearts.hasOppositeColors(aceOfDiamonds));
 
@@ -131,7 +107,7 @@ public final class CardTest {
   public void testHasOppositeColorsSpade() {
     assertFalse(twoOfSpades.hasOppositeColors(twoOfSpades));
     assertFalse(twoOfSpades.hasOppositeColors(tenOfClubs));
-    assertFalse(twoOfSpades.hasOppositeColors(queenOfSpades));
+    assertFalse(twoOfSpades.hasOppositeColors(new Card(Kind.QUEEN, Suite.SPADE)));
 
     assertTrue(twoOfSpades.hasOppositeColors(aceOfDiamonds));
     assertTrue(twoOfSpades.hasOppositeColors(jackOfHearts));
@@ -141,7 +117,7 @@ public final class CardTest {
   public void testHasOppositeColorsClub() {
     assertFalse(tenOfClubs.hasOppositeColors(tenOfClubs));
     assertFalse(tenOfClubs.hasOppositeColors(twoOfSpades));
-    assertFalse(tenOfClubs.hasOppositeColors(new Card(2, Suite.CLUB)));
+    assertFalse(tenOfClubs.hasOppositeColors(new Card(Kind.TWO, Suite.CLUB)));
 
     assertTrue(tenOfClubs.hasOppositeColors(aceOfDiamonds));
     assertTrue(tenOfClubs.hasOppositeColors(jackOfHearts));
@@ -151,7 +127,7 @@ public final class CardTest {
   public void testHasOppositeColorsHeart() {
     assertFalse(jackOfHearts.hasOppositeColors(jackOfHearts));
     assertFalse(jackOfHearts.hasOppositeColors(aceOfDiamonds));
-    assertFalse(jackOfHearts.hasOppositeColors(new Card(3, Suite.HEART)));
+    assertFalse(jackOfHearts.hasOppositeColors(new Card(Kind.THREE, Suite.HEART)));
 
     assertTrue(jackOfHearts.hasOppositeColors(tenOfClubs));
     assertTrue(jackOfHearts.hasOppositeColors(twoOfSpades));
@@ -165,9 +141,9 @@ public final class CardTest {
   @Test
   public void testIsOneHigherTrue() {
     assertTrue(tenOfClubs.isOneHigher(nineOfHearts));
-    assertTrue(tenOfClubs.isOneHigher(new Card(9, Suite.SPADE)));
-    assertTrue(tenOfClubs.isOneHigher(new Card(9, Suite.DIAMOND)));
-    assertTrue(tenOfClubs.isOneHigher(new Card(9, Suite.CLUB)));
+    assertTrue(tenOfClubs.isOneHigher(new Card(Kind.NINE, Suite.SPADE)));
+    assertTrue(tenOfClubs.isOneHigher(new Card(Kind.NINE, Suite.DIAMOND)));
+    assertTrue(tenOfClubs.isOneHigher(new Card(Kind.NINE, Suite.CLUB)));
   }
 
   @Test

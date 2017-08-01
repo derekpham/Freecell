@@ -22,7 +22,7 @@ public final class FreecellModelCreator {
    * @return the model
    * @throws IllegalArgumentException if the given {@link GameType} is {@code null}
    */
-  public static FreecellOperations<Card> create(GameType type) {
+  public static FreecellOperations create(GameType type) {
     if (type == null) {
       throw new IllegalArgumentException("Passed in parameter can't be null.");
     }
