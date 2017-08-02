@@ -21,7 +21,7 @@ public interface FreecellOperations {
    * </ul>
    *
    * @return the deck of cards as a list
-   */
+   */ // TODO add specification for an unshuffled deck (for testing purposes)
   List<Card> getDeck();
 
   /**

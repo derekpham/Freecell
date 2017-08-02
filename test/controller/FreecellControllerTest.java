@@ -10,7 +10,7 @@ import java.util.List;
 import model.Card;
 import model.FreecellModel;
 import model.FreecellOperations;
-import model.Kind;
+import model.Rank;
 import model.Suite;
 
 import static org.junit.Assert.assertEquals;
@@ -65,7 +65,7 @@ public class FreecellControllerTest {
   public void testStartGameFailHasDupsDeck() {
     List<Card> cards = new LinkedList<>();
     for (int i = 0; i < cards.size(); i += 1) {
-      cards.add(new Card(Kind.ACE, Suite.CLUB));
+      cards.add(new Card(Rank.ACE, Suite.CLUB));
     }
 
     controller.playGame(cards, model, 5, 3, true);

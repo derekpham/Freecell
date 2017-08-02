@@ -54,10 +54,16 @@ final class Pile implements Iterable<Card> {
     return this.rule.canAdd(this, build);
   }
 
+  // checks whether you can take cards starting from the given index out of this pile
+  boolean canExtract(int startIdx) {
+    return this.rule.canExtract(this, startIdx);
+  }
+
   Card get(int i) {
     return this.pile.get(i);
   }
 
+  // TODO leaky because of the remove method
   @Override
   public Iterator<Card> iterator() {
     return this.pile.iterator();

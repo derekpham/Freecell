@@ -10,4 +10,9 @@ class OpenRule implements PileRule {
   public boolean canAdd(Pile pile, List<Card> build) {
     return pile.size() == 0 && build.size() == 1;
   }
+
+  @Override
+  public boolean canExtract(Pile pile, int startIdx) {
+    return pile.size() == 1 && startIdx == 0;
+  }
 }

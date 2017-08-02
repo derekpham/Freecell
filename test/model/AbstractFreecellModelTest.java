@@ -87,14 +87,14 @@ public abstract class AbstractFreecellModelTest {
   public void testStartGameInvalidDeck2() {
     List<Card> invalidDeck = new ArrayList<>();
     for (int i = 0; i < 52; i += 1) {
-      invalidDeck.add(new Card(Kind.TWO, Suite.CLUB));
+      invalidDeck.add(new Card(Rank.TWO, Suite.CLUB));
     }
     game1.startGame(invalidDeck, 5, 2, true);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testStartGameInvalidDeck3() {
-    game1.startGame(Arrays.asList(new Card[] {new Card(Kind.ACE, Suite.SPADE)}), 5, 2, false);
+    game1.startGame(Arrays.asList(new Card[] {new Card(Rank.ACE, Suite.SPADE)}), 5, 2, false);
   }
 
   @Test(expected = IllegalArgumentException.class)

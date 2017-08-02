@@ -17,4 +17,9 @@ class FoundationRule implements PileRule {
 
     return toMove.isOneHigher(top) && toMove.getSuite() == top.getSuite();
   }
+
+  @Override
+  public boolean canExtract(Pile pile, int startIdx) {
+    return false;
+  }
 }

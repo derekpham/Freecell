@@ -7,4 +7,6 @@ import java.util.List;
  */
 interface PileRule {
   boolean canAdd(Pile pile, List<Card> build);
+
+  boolean canExtract(Pile pile, int startIdx);
 }

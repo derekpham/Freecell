@@ -6,8 +6,8 @@ import java.util.Objects;
 
 /*
 06/02/17 - Make this class final
-07/31/17 - Refactored the Kind enum into this class instead of using numbers to represent values
-           -> delegates several methods to the Kind class
+07/31/17 - Refactored the Rank enum into this class instead of using numbers to represent values
+           -> delegates several methods to the Rank class
          - Renamed getNumber() method to getValue()
  */
 
@@ -20,23 +20,23 @@ import java.util.Objects;
  */
 public final class Card {
   private final Suite suite;
-  private final Kind kind;
+  private final Rank rank;
 
   /**
    * Constructs a card based on the given number and suite.
    *
-   * @param kind the kind of the card such as ace, two, jack, queen, king
+   * @param rank the rank of the card such as ace, two, jack, queen, king
    * @param suite the suite of the card
    * @throws IllegalArgumentException if the given number is less than 1 or greater than 13
    * @throws IllegalArgumentException if the given suite is null
    */
-  public Card(Kind kind, Suite suite) {
+  public Card(Rank rank, Suite suite) {
     // TODO maybe have a method that checks for any numbers of arguments
-    if (kind == null || suite == null) {
+    if (rank == null || suite == null) {
       throw new IllegalArgumentException("One of the arguments has not been initialized.");
     }
 
-    this.kind = kind;
+    this.rank = rank;
     this.suite = suite;
   }
 
@@ -47,7 +47,7 @@ public final class Card {
    * @return the formatted string that represents {@code Card}.
    */
   public String toString() {
-    return this.kind.toString() + this.suite.toString();
+    return this.rank.toString() + this.suite.toString();
   }
 
   /**
@@ -65,7 +65,7 @@ public final class Card {
    * @return the number of this {@code Card}
    */
   public int getValue() {
-    return this.kind.getValue();
+    return this.rank.getValue();
   }
 
   @Override
@@ -79,12 +79,12 @@ public final class Card {
     }
 
     Card that = (Card)other;
-    return this.kind == that.kind && this.suite == that.suite;
+    return this.rank == that.rank && this.suite == that.suite;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(this.kind, this.suite);
+    return Objects.hash(this.rank, this.suite);
   }
 
   /**

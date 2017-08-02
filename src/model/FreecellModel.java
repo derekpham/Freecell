@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /*
-07/31/17 - Adapted this class to the newly added Kind enum.
+07/31/17 - Adapted this class to the newly added Rank enum.
  */
 
 /**
@@ -13,6 +13,8 @@ import java.util.List;
  * functionality.
  */
 public class FreecellModel implements FreecellOperations {
+  private static final int NUM_FOUNDATIONS = 4;
+
   List<Pile> foundationPiles;
   List<Pile> cascadePiles;
   List<Pile> openPiles;
@@ -42,9 +44,9 @@ public class FreecellModel implements FreecellOperations {
   public List<Card> getDeck() {
     List<Card> result = new ArrayList<>();
 
-    for (Kind kind : Kind.values()) {
+    for (int num = 13; num >= 1; num--) { // TODO makes this loop nicer
       for (Suite suite : Suite.values()) {
-        result.add(new Card(kind, suite));
+        result.add(new Card(Rank.intToRank(num), suite));
       }
     }
 
@@ -80,7 +82,7 @@ public class FreecellModel implements FreecellOperations {
       this.openPiles.add(new Pile(new OpenRule()));
     }
 
-    this.foundationPiles = new ArrayList<>(4);
+    this.foundationPiles = new ArrayList<>(NUM_FOUNDATIONS);
     for (int i = 0; i < 4; i += 1) {
       this.foundationPiles.add(new Pile(new FoundationRule()));
     }
@@ -150,15 +152,18 @@ public class FreecellModel implements FreecellOperations {
 
     Pile from = this.getPile(source, pileNumber);
     Pile to = this.getPile(destination, destPileNumber);
-    List<Card> build = from.extractBuild(cardIndex);
 
-    if (to.canAdd(build)) {
-      to.addAll(build);
-    } else {
-      from.addAll(build);
-      throw new IllegalArgumentException("Invalid move: cannot move the given build into the "
-              + "specified pile.");
+    if (!from.canExtract(cardIndex)) {
+      throw new IllegalArgumentException("Cannot move cards out of the given pile.");
     }
+
+    List<Card> build = from.extractBuild(cardIndex);
+    if (!to.canAdd(build)) {
+      from.addAll(build);
+      throw new IllegalArgumentException("Cannot move the cards to the given pile.");
+    }
+
+    to.addAll(build);
   }
 
   /*
