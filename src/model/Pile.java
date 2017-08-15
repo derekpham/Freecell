@@ -63,6 +63,10 @@ final class Pile implements Iterable<Card> {
     return this.pile.get(i);
   }
 
+  boolean isEmpty() {
+    return this.size() == 0;
+  }
+
   // TODO leaky because of the remove method
   @Override
   public Iterator<Card> iterator() {

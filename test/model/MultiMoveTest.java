@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
  * Test class for the MultiMoveModel class specifically. Inside this class are test methods
  * that test specifically moves that involve moving multiple cards.
  */
+/**
 public final class MultiMoveTest {
   FreecellOperations model = new MultiMoveModel();
 
@@ -318,4 +319,4 @@ public final class MultiMoveTest {
             + "C4: K♥, J♣, 10♦, 9♠, 8♥, 6♣, 5♦, 4♠, 3♥, A♣\n"
             + "C5: Q♣, J♦, 10♠, 9♥, 7♣, 6♦, 5♠, 4♥, 2♣, A♦");
   }
-}
+}**/

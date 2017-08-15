@@ -12,9 +12,13 @@ class FoundationRule implements PileRule {
       return false;
     }
 
-    Card top = pile.get(0);
     Card toMove = build.get(0);
 
+    if (pile.isEmpty()) {
+      return toMove.getRank() == Rank.ACE;
+    }
+
+    Card top = pile.get(pile.size() - 1);
     return toMove.isOneHigher(top) && toMove.getSuite() == top.getSuite();
   }
 

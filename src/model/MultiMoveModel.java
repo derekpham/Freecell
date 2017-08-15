@@ -15,13 +15,4 @@ public final class MultiMoveModel extends FreecellModel {
   public MultiMoveModel() {
     super();
   }
-
-  /*
-  Same as the super method, but supports multi-card moves.
-   */
-  @Override
-  public void move(PileType source, int pileNumber, int cardIndex, PileType destination,
-                   int destPileNumber) throws IllegalArgumentException {
-
-  }
 }

@@ -68,6 +68,15 @@ public final class Card {
     return this.rank.getValue();
   }
 
+  /**
+   * Returns the rank of this {@code Card}.
+   *
+   * @return the rank of this {@code Card}.
+   */
+  public Rank getRank() {
+    return this.rank;
+  }
+
   @Override
   public boolean equals(Object other) {
     if (other == this) {
